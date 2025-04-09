@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reqrutify - AI Hiring Assistant</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 240px;
+        height: 100vh;
+        background-color: #1a1a2e;
+        color: white;
+        transition: width 0.3s ease;
+        z-index: 1000;
+        overflow: hidden;
+      }
+
+      .sidebar.collapsed {
+        width: 60px;
+      }
+
+      .sidebar.collapsed #brandName,
+      .sidebar.collapsed .label {
+        display: none;
+      }
+
+      .sidebar .nav-link {
+        color: white;
+        padding: 15px 20px;
+      }
+
+      .sidebar .nav-link:hover {
+        background-color: #16213e;
+      }
+
+      .sidebar-header {
+        font-size: 1.25rem;
+        font-weight: bold;
+        background-color: #0f3460;
+      }
+
+      .sidebar-open-btn {
+        position: fixed;
+        top: 20px;
+        left: 60px;
+        background-color: #1a1a2e;
+        color: white;
+        border: none;
+        z-index: 1100;
+        display: none;
+        padding: 6px 10px;
+      }
+
+      .sidebar.collapsed ~ .sidebar-open-btn {
+        display: block;
+      }
+
+      .main-content {
+        margin-left: 240px;
+        transition: margin-left 0.3s ease;
+        width: 100%;
+      }
+
+      .sidebar.collapsed ~ .main-content {
+        margin-left: 60px;
+      }
+
+      .hero-section {
+        height: 100vh;
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        color: white;
+        text-align: center;
+      }
+
+      .text-glow {
+        text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+      }
+
+      .section-dark {
+        background-color: #1a1a2e;
+        color: white;
+      }
+
+      .section-light {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .carousel-wrapper {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .scrolling-wrapper {
+        display: flex;
+        gap: 1rem;
+        transition: transform 0.5s ease;
+        will-change: transform;
+        padding: 1rem;
+      }
+
+      .feature-card {
+        flex: 0 0 30%;
+        background: #0f3460;
+        color: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        text-align: center;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:nth-child(3) {
+        transform: scale(1.1);
+        background: #5c6bc0;
+      }
+
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      .carousel-btn.left {
+        left: 0;
+      }
+
+      .carousel-btn.right {
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header d-flex justify-content-between align-items-center p-3">
+        <span id="brandName">Reqrutify</span>
+        <button id="sidebarToggle" class="btn btn-sm btn-outline-light" onclick="toggleSidebar()">
+          &lt;
+        </button>
+      </div>
+      <ul class="nav flex-column">
+        <li><a href="#home" class="nav-link"><i class="bi bi-house"></i> <span class="label">Home</span></a></li>
+        <li><a href="#features" class="nav-link"><i class="bi bi-stars"></i> <span class="label">Features</span></a></li>
+        <li><a href="#solutions" class="nav-link"><i class="bi bi-lightbulb"></i> <span class="label">Solutions</span></a></li>
+        <li><a href="#testimonials" class="nav-link"><i class="bi bi-people"></i> <span class="label">Testimonials</span></a></li>
+        <li><a href="#pricing" class="nav-link"><i class="bi bi-currency-dollar"></i> <span class="label">Pricing</span></a></li>
+        <li><a href="#contact" class="nav-link"><i class="bi bi-envelope"></i> <span class="label">Contact</span></a></li>
+      </ul>
+    </div>
+
+    <button id="sidebarOpen" class="sidebar-open-btn" onclick="toggleSidebar()">&gt;</button>
+
+    <div class="main-content" id="mainContent">
+      <!-- Top Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Reqrutify</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+              <li class="nav-item"><a class="nav-link" href="#solutions">Solutions</a></li>
+              <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+              <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+              <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section id="home" class="hero-section text-center d-flex align-items-center justify-content-center">
+        <div>
+          <h1 class="display-3 fw-bold text-glow">Welcome to Reqrutify</h1>
+          <p class="lead">AI-powered hiring platform for the future of recruitment</p>
+        </div>
+      </section>
+
+      <!-- Section 1: Features -->
+      <section id="features" class="section-dark py-5">
+        <div class="container">
+          <h2 class="text-center mb-4">Why Choose Reqrutify?</h2>
+          <div class="carousel-wrapper position-relative">
+            <button class="carousel-btn left" onclick="scrollLeft()">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <div class="scrolling-wrapper" id="featureCards">
+              <div class="card feature-card">Smart Resume Parsing</div>
+              <div class="card feature-card">Automated Interview Questions</div>
+              <div class="card feature-card">Candidate Scoring</div>
+              <div class="card feature-card">Integrated Feedback System</div>
+              <div class="card feature-card">Team Collaboration</div>
+              <div class="card feature-card">Hiring Analytics</div>
+            </div>
+            <button class="carousel-btn right" onclick="scrollRight()">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Solutions -->
+      <section id="solutions" class="section-light py-5">
+        <div class="container text-center">
+          <h2>Solutions Tailored for You</h2>
+          <p class="lead">Whether you're a startup or an enterprise, Reqrutify adapts to your hiring needs.</p>
+        </div>
+      </section>
+
+      <!-- Section 3: Testimonials -->
+      <section id="testimonials" class="section-dark py-5">
+        <div class="container text-center">
+          <h2>What Our Clients Say</h2>
+          <p class="lead">"Reqrutify streamlined our entire hiring process. It's a game changer!"</p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="text-center bg-dark text-white py-4">
+        <p class="mb-0">© 2025 Reqrutify. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("collapsed");
+      }
+
+      let scrollIndex = 0;
+      const cards = document.getElementById("featureCards");
+      const cardWidth = 300; // approx width of card including gap
+      function scrollRight() {
+        scrollIndex = Math.min(scrollIndex + 1, cards.children.length - 3);
+        cards.style.transform = `translateX(-${scrollIndex * cardWidth}px)`;
+      }
+
+      function scrollLeft() {
+        scrollIndex = Math.max(scrollIndex - 1, 0);
+        cards.style.transform = `translateX(-${scrollIndex * cardWidth}px)`;
+      }
+    </script>
+  </body>
+</html>
