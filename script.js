@@ -5,7 +5,7 @@ function toggleSidebar() {
   const openBtn = document.getElementById('sidebarOpen');
 
   sidebar.classList.toggle('collapsed');
-  brandName.innerText = sidebar.classList.contains('collapsed') ? 'R' : 'Reqrutify';
+  brandName.innerText = sidebar.classList.contains('collapsed') ? 'Q' : 'MO-ON';
 
   if (sidebar.classList.contains('collapsed')) {
     toggleBtn.style.display = 'none';
